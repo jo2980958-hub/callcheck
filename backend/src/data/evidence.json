@@ -1,0 +1,895 @@
+{
+ "payout.no-batch-id.first": {
+  "claim": "no sender_batch_id: first send",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:59:53.939Z",
+  "group": "extra",
+  "batchStatus": "PENDING"
+ },
+ "payout.no-batch-id.second": {
+  "claim": "no sender_batch_id: identical retry creates a second batch",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:59:54.487Z",
+  "group": "extra",
+  "batchStatus": "PENDING"
+ },
+ "payout.phone": {
+  "claim": "PHONE type in sandbox",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:59:54.961Z",
+  "group": "extra",
+  "batchStatus": "PENDING"
+ },
+ "payout.item-over-batch-type": {
+  "claim": "recipient_type PAYPAL_ID with an email",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:59:55.414Z",
+  "group": "extra",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "order.wallet-source.no-request-id": {
+  "claim": "wallet order without PayPal-Request-Id",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 200,
+  "at": "2026-10-02T03:59:56.057Z",
+  "group": "extra",
+  "resourceStatus": "PAYER_ACTION_REQUIRED",
+  "id": "8E529519CA044790A"
+ },
+ "order.usd-3dp": {
+  "claim": "three decimals on USD",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 422,
+  "at": "2026-10-02T03:59:56.462Z",
+  "group": "extra",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "DECIMAL_PRECISION",
+  "description": "If the currency supports decimals, only two decimal place precision is supported."
+ },
+ "order.card-source": {
+  "claim": "card source on an account without card processing",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 400,
+  "at": "2026-10-02T03:59:56.859Z",
+  "group": "extra",
+  "name": "INVALID_REQUEST",
+  "issue": "PAYPAL_REQUEST_ID_REQUIRED",
+  "description": "A PayPal-Request-Id is required if you are trying to process payment for an Order. Please specify a PayPal-Request-Id or Create the Order without a 'payment_source' specified."
+ },
+ "generic.content-type-form": {
+  "claim": "curl -d without a JSON content type",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 415,
+  "group": "extra",
+  "name": "UNSUPPORTED_MEDIA_TYPE"
+ },
+ "invoice.search-by-number": {
+  "claim": "adopt an existing invoice by number",
+  "method": "POST",
+  "path": "/v2/invoicing/search-invoices",
+  "status": 200,
+  "at": "2026-10-02T03:59:57.680Z",
+  "group": "extra"
+ },
+ "catalog.product.category-list": {
+  "claim": "category enum",
+  "method": "GET",
+  "path": "/v1/catalogs/products?page_size=1",
+  "status": 200,
+  "at": "2026-10-02T03:59:58.079Z",
+  "group": "extra"
+ },
+ "invoice.no-number": {
+  "claim": "invoice number auto-assigned",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 201,
+  "at": "2026-10-02T03:59:58.674Z",
+  "group": "extra"
+ },
+ "txn-search.no-dates": {
+  "claim": "missing dates",
+  "method": "GET",
+  "path": "/v1/reporting/transactions",
+  "status": 400,
+  "at": "2026-10-02T03:59:59.037Z",
+  "group": "extra",
+  "name": "INVALID_REQUEST",
+  "issue": "`start_date` and `end_date` should be present in query"
+ },
+ "txn-search.scope-balances": {
+  "claim": "balances endpoint",
+  "method": "GET",
+  "path": "/v1/reporting/balances",
+  "status": 200,
+  "at": "2026-10-02T03:59:59.508Z",
+  "group": "extra"
+ },
+ "payout.phone.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/NS7R648Z3R47Q",
+  "status": 200,
+  "group": "extra",
+  "batchStatus": "SUCCESS",
+  "itemStatus": "UNCLAIMED",
+  "itemError": "RECEIVER_UNREGISTERED"
+ },
+ "invoice.create": {
+  "claim": "create returns href only",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 201,
+  "at": "2026-10-02T03:52:52.243Z",
+  "group": "invoices"
+ },
+ "invoice.dup-number": {
+  "claim": "duplicate invoice_number -> 422",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 422,
+  "at": "2026-10-02T03:52:52.780Z",
+  "group": "invoices",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "DUPLICATE_INVOICE_NUMBER",
+  "description": "Invoice number is duplicate."
+ },
+ "invoice.number-26": {
+  "claim": "invoice_number > 25 chars",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 400,
+  "at": "2026-10-02T03:52:53.809Z",
+  "group": "invoices",
+  "name": "INVALID_REQUEST",
+  "issue": "INVALID_STRING_MAX_LENGTH",
+  "description": "Invoice number length should be less than 25 characters."
+ },
+ "invoice.generate-number": {
+  "claim": "generated number",
+  "method": "POST",
+  "path": "/v2/invoicing/generate-next-invoice-number",
+  "status": 200,
+  "at": "2026-10-02T03:52:54.197Z",
+  "group": "invoices"
+ },
+ "invoice.patch": {
+  "claim": "no PATCH on invoices",
+  "method": "PATCH",
+  "path": "/v2/invoicing/invoices/INV2-GJ7Y-UM8T-DT2R-TNEV",
+  "status": 404,
+  "at": "2026-10-02T03:52:54.471Z",
+  "group": "invoices"
+ },
+ "invoice.qr-before-send": {
+  "claim": "QR needs a sent invoice",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices/INV2-GJ7Y-UM8T-DT2R-TNEV/generate-qr-code",
+  "status": 200,
+  "at": "2026-10-02T03:52:54.875Z",
+  "group": "invoices",
+  "text": "--566998c4-dd8e-45aa-9370-945ba0499568\r\nContent-Disposition: form-data; name=\"im"
+ },
+ "invoice.delete-draft": {
+  "claim": "draft delete works",
+  "method": "DELETE",
+  "path": "/v2/invoicing/invoices/INV2-GJ7Y-UM8T-DT2R-TNEV",
+  "status": 204,
+  "at": "2026-10-02T03:52:55.318Z",
+  "group": "invoices"
+ },
+ "invoice.mock-header": {
+  "claim": "PayPal-Mock-Response is ignored on Invoicing",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 403,
+  "at": "2026-10-02T03:52:55.717Z",
+  "group": "invoices"
+ },
+ "invoice.too-many-items": {
+  "claim": "items > 100",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 400,
+  "at": "2026-10-02T03:52:56.454Z",
+  "group": "invoices",
+  "name": "INVALID_REQUEST",
+  "issue": "INVALID_ARRAY_MAX_ITEMS",
+  "description": "Invoice items should be less than 100 items."
+ },
+ "mcp.mcp.sandbox.paypal.com/http": {
+  "claim": "mcp path probe",
+  "status": 404,
+  "at": "2026-10-02T03:53:17.358Z",
+  "group": "mcp",
+  "text": "404 Not Found"
+ },
+ "mcp.mcp.sandbox.paypal.com/mcp": {
+  "claim": "mcp path probe",
+  "status": 401,
+  "at": "2026-10-02T03:53:17.618Z",
+  "group": "mcp",
+  "text": "{\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}"
+ },
+ "mcp.mcp.sandbox.paypal.com/sse": {
+  "claim": "mcp path probe",
+  "status": 401,
+  "at": "2026-10-02T03:53:17.666Z",
+  "group": "mcp",
+  "text": "{\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}"
+ },
+ "mcp.mcp.sandbox.paypal.com/.well-known/oauth-authorization-server": {
+  "claim": "mcp path probe",
+  "status": 200,
+  "at": "2026-10-02T03:53:17.723Z",
+  "group": "mcp",
+  "text": "{\"issuer\":\"https://mcp.sandbox.paypal.com\",\"authorization_endpoint\":\"https://mcp"
+ },
+ "mcp.mcp.paypal.com/http": {
+  "claim": "mcp path probe",
+  "status": 404,
+  "at": "2026-10-02T03:53:18.584Z",
+  "group": "mcp",
+  "text": "404 Not Found"
+ },
+ "mcp.mcp.paypal.com/mcp": {
+  "claim": "mcp path probe",
+  "status": 401,
+  "at": "2026-10-02T03:53:18.716Z",
+  "group": "mcp",
+  "text": "{\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}"
+ },
+ "mcp.mcp.paypal.com/sse": {
+  "claim": "mcp path probe",
+  "status": 401,
+  "at": "2026-10-02T03:53:18.763Z",
+  "group": "mcp",
+  "text": "{\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}"
+ },
+ "mcp.mcp.paypal.com/.well-known/oauth-authorization-server": {
+  "claim": "mcp path probe",
+  "status": 200,
+  "at": "2026-10-02T03:53:18.804Z",
+  "group": "mcp",
+  "text": "{\"issuer\":\"https://mcp.paypal.com\",\"authorization_endpoint\":\"https://mcp.paypal."
+ },
+ "spec.invoicing.github-vs-live": {
+  "status": 200,
+  "group": "mcp"
+ },
+ "txn-search.403": {
+  "claim": "reporting 403",
+  "method": "GET",
+  "path": "/v1/reporting/transactions?start_date=2026-09-20T00%3A00%3A00-0000&end_date=2026-09-25T00%3A00%3A00-0000",
+  "status": 200,
+  "at": "2026-10-02T03:53:12.451Z",
+  "group": "misc"
+ },
+ "txn-search.window-32d": {
+  "claim": "window > 31 days",
+  "method": "GET",
+  "path": "/v1/reporting/transactions?start_date=2026-08-01T00%3A00%3A00-0000&end_date=2026-09-25T00%3A00%3A00-0000",
+  "status": 400,
+  "at": "2026-10-02T03:53:12.797Z",
+  "group": "misc",
+  "name": "INVALID_REQUEST",
+  "issue": "Date range is greater than 31 days"
+ },
+ "disputes.list": {
+  "claim": "sandbox has zero disputes",
+  "method": "GET",
+  "path": "/v1/customer/disputes",
+  "status": 200,
+  "at": "2026-10-02T03:53:13.381Z",
+  "group": "misc"
+ },
+ "disputes.invented-id": {
+  "claim": "invented id collides",
+  "method": "GET",
+  "path": "/v1/customer/disputes/PP-D-48201",
+  "status": 403,
+  "at": "2026-10-02T03:53:13.869Z",
+  "group": "misc",
+  "name": "NOT_AUTHORIZED",
+  "issue": "ACTION_NOT_ALLOWED"
+ },
+ "disputes.unknown-id": {
+  "claim": "unknown id 404",
+  "method": "GET",
+  "path": "/v1/customer/disputes/PP-D-999999999999",
+  "status": 404,
+  "at": "2026-10-02T03:53:14.309Z",
+  "group": "misc",
+  "name": "RESOURCE_NOT_FOUND",
+  "issue": "RESOURCE_NOT_FOUND"
+ },
+ "webhooks.event-types": {
+  "claim": "event-type catalogue",
+  "status": 200,
+  "group": "misc",
+  "count": 205
+ },
+ "webhook.bad-event-name": {
+  "claim": "PAYMENT.PAYOUTS-ITEM.SUCCESS does not exist",
+  "method": "POST",
+  "path": "/v1/notifications/webhooks",
+  "status": 400,
+  "at": "2026-10-02T03:53:14.953Z",
+  "group": "misc",
+  "name": "VALIDATION_ERROR",
+  "issue": "Not a valid event name"
+ },
+ "webhook.http-url": {
+  "claim": "http url rejected",
+  "method": "POST",
+  "path": "/v1/notifications/webhooks",
+  "status": 400,
+  "at": "2026-10-02T03:53:15.293Z",
+  "group": "misc",
+  "name": "VALIDATION_ERROR",
+  "issue": "Not a valid webhook URL"
+ },
+ "webhook.verify-simulator": {
+  "claim": "simulator events cannot verify",
+  "method": "POST",
+  "path": "/v1/notifications/verify-webhook-signature",
+  "status": 400,
+  "at": "2026-10-02T03:53:15.618Z",
+  "group": "misc",
+  "name": "INVALID_REQUEST",
+  "issue": "must match \"^(?!\\d+$)\\w+\\S+\""
+ },
+ "webhooks.count": {
+  "claim": "slots used",
+  "status": 200,
+  "group": "misc",
+  "count": 6
+ },
+ "payout.paypal-id.bogus13": {
+  "claim": "PAYPAL_ID that looks right but is not an account",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T04:09:34.527Z",
+  "group": "more",
+  "batchStatus": "PENDING"
+ },
+ "payout.paypal-id.short": {
+  "claim": "PAYPAL_ID that is the wrong shape",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T04:09:34.999Z",
+  "group": "more",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "payout.user-handle.handle": {
+  "claim": "USER_HANDLE with a Venmo-style handle",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T04:09:35.399Z",
+  "group": "more",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "invoice.request-id.first": {
+  "claim": "Request-Id on invoice create",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 201,
+  "at": "2026-10-02T04:09:35.921Z",
+  "group": "more"
+ },
+ "invoice.request-id.second": {
+  "claim": "same Request-Id, new invoice number",
+  "method": "POST",
+  "path": "/v2/invoicing/invoices",
+  "status": 201,
+  "at": "2026-10-02T04:09:36.473Z",
+  "group": "more"
+ },
+ "payout.paypal-id.bogus13.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/Y9LZJNSLL4VRE",
+  "status": 200,
+  "group": "more",
+  "batchStatus": "DENIED",
+  "itemStatus": "FAILED",
+  "itemError": "RECEIVER_ACCOUNT_INVALID"
+ },
+ "order.create": {
+  "claim": "wallet order needs a browser approval",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 201,
+  "at": "2026-10-02T03:52:57.673Z",
+  "group": "orders",
+  "resourceStatus": "CREATED",
+  "id": "8MT668095H990811B"
+ },
+ "order.create.same-rid": {
+  "claim": "same Request-Id replays the first response",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 200,
+  "at": "2026-10-02T03:52:58.257Z",
+  "group": "orders",
+  "resourceStatus": "CREATED",
+  "id": "8MT668095H990811B"
+ },
+ "order.create.same-rid.diff-body": {
+  "claim": "same Request-Id, different body",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 200,
+  "at": "2026-10-02T03:52:58.820Z",
+  "group": "orders",
+  "resourceStatus": "CREATED",
+  "id": "8MT668095H990811B"
+ },
+ "order.amount-mismatch": {
+  "claim": "breakdown must sum",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 422,
+  "at": "2026-10-02T03:52:59.295Z",
+  "group": "orders",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "AMOUNT_MISMATCH",
+  "description": "Should equal item_total + tax_total + shipping + handling + insurance + gratuity - shipping_discount - discount."
+ },
+ "order.jpy-decimals": {
+  "claim": "zero-decimal currency",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 422,
+  "at": "2026-10-02T03:52:59.783Z",
+  "group": "orders",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "DECIMALS_NOT_SUPPORTED",
+  "description": "Currency does not support decimals. Please refer to https://developer.paypal.com/docs/integration/direct/rest/currency-codes/ for more information."
+ },
+ "order.value-number": {
+  "claim": "value must be a string",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 201,
+  "at": "2026-10-02T03:53:00.365Z",
+  "group": "orders",
+  "resourceStatus": "CREATED",
+  "id": "1H63550113771120X"
+ },
+ "order.bad-intent": {
+  "claim": "unknown intent",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 400,
+  "at": "2026-10-02T03:53:00.990Z",
+  "group": "orders",
+  "name": "INVALID_REQUEST",
+  "issue": "INVALID_PARAMETER_VALUE",
+  "description": "The value of a field is invalid."
+ },
+ "order.wallet-source": {
+  "claim": "wallet create with payment_source returns 200",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 200,
+  "at": "2026-10-02T03:53:01.918Z",
+  "group": "orders",
+  "resourceStatus": "PAYER_ACTION_REQUIRED",
+  "id": "0BJ231666J236892H"
+ },
+ "order.mock-header": {
+  "claim": "PayPal-Mock-Response works on Orders",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 422,
+  "at": "2026-10-02T03:53:02.307Z",
+  "group": "orders",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "INSTRUMENT_DECLINED",
+  "description": "The instrument presented  was either declined by the processor or bank, or it can't be used for this payment."
+ },
+ "order.capture-unapproved": {
+  "claim": "capture before approval -> 422",
+  "method": "POST",
+  "path": "/v2/checkout/orders/8MT668095H990811B/capture",
+  "status": 422,
+  "at": "2026-10-02T03:53:02.894Z",
+  "group": "orders",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "ORDER_NOT_APPROVED",
+  "description": "Payer has not yet approved the Order for payment. Please redirect the payer to the 'rel':'approve' url returned as part of the HATEOAS links within the Create Order call or provide a valid payment_source in the request."
+ },
+ "order.authorize-unapproved": {
+  "claim": "authorize before approval -> 422",
+  "method": "POST",
+  "path": "/v2/checkout/orders/8MT668095H990811B/authorize",
+  "status": 422,
+  "at": "2026-10-02T03:53:03.410Z",
+  "group": "orders",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "ORDER_NOT_APPROVED",
+  "description": "Payer has not yet approved the Order for payment. Please redirect the payer to the 'rel':'approve' url returned as part of the HATEOAS links within the Create Order call or provide a valid payment_source in the request."
+ },
+ "order.missing-purchase-units": {
+  "claim": "required field",
+  "method": "POST",
+  "path": "/v2/checkout/orders",
+  "status": 400,
+  "at": "2026-10-02T03:53:03.824Z",
+  "group": "orders",
+  "name": "INVALID_REQUEST",
+  "issue": "MISSING_REQUIRED_PARAMETER",
+  "description": "A required field / parameter is missing."
+ },
+ "payout.create.ok": {
+  "claim": "201 is only acceptance",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:13.240Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.dup-batch-id.same-request-id": {
+  "claim": "duplicate sender_batch_id -> 400",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:14.175Z",
+  "group": "payouts",
+  "name": "USER_BUSINESS_ERROR",
+  "issue": "Batch with given sender_batch_id already exists"
+ },
+ "payout.dup-batch-id.new-request-id": {
+  "claim": "duplicate sender_batch_id -> 400 regardless of request id",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:14.659Z",
+  "group": "payouts",
+  "name": "USER_BUSINESS_ERROR",
+  "issue": "Batch with given sender_batch_id already exists"
+ },
+ "payout.request-id-only.first": {
+  "claim": "Request-Id alone does not dedupe a payout",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:15.145Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.request-id-only.second": {
+  "claim": "same Request-Id, new sender_batch_id",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:15.601Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.unregistered": {
+  "claim": "batch SUCCESS while item UNCLAIMED",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:16.054Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.gbp": {
+  "claim": "GBP settles",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:16.529Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.brl": {
+  "claim": "non-holding currency",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:17.015Z",
+  "group": "payouts",
+  "name": "NON_HOLDING_CURRENCY"
+ },
+ "payout.mixed-currency": {
+  "claim": "mixed currency batch",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:17.430Z",
+  "group": "payouts",
+  "name": "VALIDATION_ERROR",
+  "issue": "Multiple currencies within a batch is not allowed"
+ },
+ "payout.type.user-handle": {
+  "claim": "USER_HANDLE not in enum",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:17.834Z",
+  "group": "payouts",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "payout.type.venmo-handle": {
+  "claim": "VENMO_HANDLE not in enum",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:18.231Z",
+  "group": "payouts",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "payout.type.bogus": {
+  "claim": "bogus type",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:18.659Z",
+  "group": "payouts",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "payout.self-pay": {
+  "claim": "paying the sender account",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:19.118Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.cap.20000.01": {
+  "claim": "per-item cap not enforced in sandbox",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:19.579Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.bad-receiver": {
+  "claim": "malformed receiver",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 400,
+  "at": "2026-10-02T03:52:19.988Z",
+  "group": "payouts",
+  "name": "VALIDATION_ERROR",
+  "issue": "Receiver is invalid or does not match with type"
+ },
+ "payout.magic.ERRPYO005": {
+  "claim": "magic note forces INSUFFICIENT_FUNDS",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 422,
+  "at": "2026-10-02T03:52:20.368Z",
+  "group": "payouts",
+  "name": "INSUFFICIENT_FUNDS"
+ },
+ "payout.no-batch-id": {
+  "claim": "sender_batch_id is optional",
+  "method": "POST",
+  "path": "/v1/payments/payouts",
+  "status": 201,
+  "at": "2026-10-02T03:52:20.823Z",
+  "group": "payouts",
+  "batchStatus": "PENDING"
+ },
+ "payout.create.ok.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/8SBCY3FVDERAJ",
+  "status": 200,
+  "group": "payouts",
+  "batchStatus": "SUCCESS",
+  "itemStatus": "SUCCESS"
+ },
+ "payout.unregistered.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/GPGXWRBW98GG6",
+  "status": 200,
+  "group": "payouts",
+  "batchStatus": "SUCCESS",
+  "itemStatus": "UNCLAIMED",
+  "itemError": "RECEIVER_UNREGISTERED"
+ },
+ "payout.gbp.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/JMMXAJLUMJZDE",
+  "status": 200,
+  "group": "payouts",
+  "batchStatus": "SUCCESS",
+  "itemStatus": "SUCCESS"
+ },
+ "payout.self-pay.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/JRVW79N9UBXFC",
+  "status": 200,
+  "group": "payouts",
+  "batchStatus": "DENIED",
+  "itemStatus": "FAILED",
+  "itemError": "SELF_PAY_NOT_ALLOWED"
+ },
+ "payout.cap.20000.01.poll": {
+  "claim": "terminal state",
+  "method": "GET",
+  "path": "/v1/payments/payouts/68WM7KD45MB5J",
+  "status": 200,
+  "group": "payouts",
+  "batchStatus": "SUCCESS",
+  "itemStatus": "UNCLAIMED",
+  "itemError": "RECEIVER_UNREGISTERED"
+ },
+ "payout.cancel-unclaimed": {
+  "claim": "cancel while UNCLAIMED",
+  "method": "POST",
+  "path": "/v1/payments/payouts-item/ZYJ6G7QVZTBJJ/cancel",
+  "status": 200,
+  "at": "2026-10-02T03:52:47.534Z",
+  "group": "payouts"
+ },
+ "catalog.product.healthcare": {
+  "claim": "category restrictions",
+  "method": "POST",
+  "path": "/v1/catalogs/products",
+  "status": 400,
+  "at": "2026-10-02T03:53:08.106Z",
+  "group": "subs",
+  "name": "INVALID_REQUEST",
+  "issue": "INVALID_PARAMETER_VALUE",
+  "description": "The value of a field is invalid."
+ },
+ "catalog.product.services": {
+  "claim": "category SERVICES accepted",
+  "method": "POST",
+  "path": "/v1/catalogs/products",
+  "status": 201,
+  "at": "2026-10-02T03:53:08.671Z",
+  "group": "subs",
+  "name": "Callcheck probe muqfgzbq",
+  "id": "PROD-1FJ425345G009553K"
+ },
+ "plan.infinite-trial": {
+  "claim": "total_cycles 0 only on REGULAR",
+  "method": "POST",
+  "path": "/v1/billing/plans",
+  "status": 422,
+  "at": "2026-10-02T03:53:09.127Z",
+  "group": "subs",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "INVALID_TRIAL_BILLING_TOTAL_CYCLES",
+  "description": "Total cycles for trial billing must be greater than '0'."
+ },
+ "plan.no-regular": {
+  "claim": "exactly one REGULAR",
+  "method": "POST",
+  "path": "/v1/billing/plans",
+  "status": 422,
+  "at": "2026-10-02T03:53:09.572Z",
+  "group": "subs",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "MISSING_REGULAR_BILLING_CYCLE",
+  "description": "Plan should have at least one regular billing cycle."
+ },
+ "plan.ok": {
+  "claim": "plan created",
+  "method": "POST",
+  "path": "/v1/billing/plans",
+  "status": 201,
+  "at": "2026-10-02T03:53:10.062Z",
+  "group": "subs",
+  "name": "cc plan muqfgzbq",
+  "resourceStatus": "ACTIVE",
+  "id": "P-9A09100968061625VNK7SVJI"
+ },
+ "plan.patch-cycles": {
+  "claim": "billing_cycles not patchable",
+  "method": "PATCH",
+  "path": "/v1/billing/plans/P-9A09100968061625VNK7SVJI",
+  "status": 400,
+  "at": "2026-10-02T03:53:10.446Z",
+  "group": "subs",
+  "name": "INVALID_REQUEST",
+  "issue": "INVALID_PATCH_PATH",
+  "description": "The specified field cannot be patched."
+ },
+ "subscription.create": {
+  "claim": "subscription needs buyer approval",
+  "method": "POST",
+  "path": "/v1/billing/subscriptions",
+  "status": 201,
+  "at": "2026-10-02T03:53:11.032Z",
+  "group": "subs",
+  "resourceStatus": "APPROVAL_PENDING",
+  "id": "I-WHJ17FY97VL4"
+ },
+ "subscription.activate-pending": {
+  "claim": "activate before approval",
+  "method": "POST",
+  "path": "/v1/billing/subscriptions/I-WHJ17FY97VL4/activate",
+  "status": 422,
+  "at": "2026-10-02T03:53:11.525Z",
+  "group": "subs",
+  "name": "UNPROCESSABLE_ENTITY",
+  "issue": "SESSION_STATE_NOT_VALID",
+  "description": "Buyer has not agreed to subscription"
+ },
+ "vault.setup-token.wallet": {
+  "claim": "wallet setup token works",
+  "method": "POST",
+  "path": "/v3/vault/setup-tokens",
+  "status": 201,
+  "at": "2026-10-02T03:53:05.208Z",
+  "group": "vault",
+  "resourceStatus": "PAYER_ACTION_REQUIRED",
+  "id": "7SY00780V8382724M"
+ },
+ "vault.setup-token.missing-urls": {
+  "claim": "wallet needs experience_context urls?",
+  "method": "POST",
+  "path": "/v3/vault/setup-tokens",
+  "status": 201,
+  "at": "2026-10-02T03:53:05.671Z",
+  "group": "vault",
+  "resourceStatus": "CREATED",
+  "id": "9PJ99053LJ194130D"
+ },
+ "vault.payment-token.patch": {
+  "claim": "no update endpoint",
+  "method": "PATCH",
+  "path": "/v3/vault/payment-tokens/doesnotexist",
+  "status": 400,
+  "at": "2026-10-02T03:53:06.078Z",
+  "group": "vault",
+  "name": "INVALID_REQUEST",
+  "issue": "MISSING_REQUIRED_PARAMETER",
+  "description": "a required field / parameter is missing."
+ },
+ "vault.payment-token.get-missing": {
+  "claim": "unknown token",
+  "method": "GET",
+  "path": "/v3/vault/payment-tokens/doesnotexist",
+  "status": 404,
+  "at": "2026-10-02T03:53:06.808Z",
+  "group": "vault",
+  "name": "RESOURCE_NOT_FOUND"
+ },
+ "vault.setup-token.get": {
+  "claim": "status PAYER_ACTION_REQUIRED until buyer approves",
+  "method": "GET",
+  "path": "/v3/vault/setup-tokens/7SY00780V8382724M",
+  "status": 200,
+  "at": "2026-10-02T03:53:07.219Z",
+  "group": "vault",
+  "resourceStatus": "PAYER_ACTION_REQUIRED",
+  "id": "7SY00780V8382724M"
+ }
+}

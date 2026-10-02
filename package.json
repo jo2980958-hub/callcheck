@@ -1,0 +1,18 @@
+{
+  "name": "callcheck",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Paste a PayPal API call. Callcheck says what will break in production, then proves it against the sandbox.",
+  "scripts": {
+    "test": "npm --prefix backend test",
+    "test:sandbox": "npm --prefix backend run test:sandbox",
+    "build": "npm --prefix frontend run build",
+    "dev:api": "node backend/dev-server.js",
+    "dev:web": "npm --prefix frontend run dev",
+    "contrast": "node scripts/contrast.mjs",
+    "deploy": "./deploy.sh"
+  },
+  "devDependencies": { "playwright-core": "^1.49.0" }
+}

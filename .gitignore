@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.deploy-state/
+.env
+*.zip
+backend/src/package.json
+backend/.snapshot-cache/
+
+# QA screenshots from the build rounds — not part of the project
+screenshots/
+shots/
+.shots/
+evidence/

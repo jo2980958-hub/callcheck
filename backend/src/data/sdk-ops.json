@@ -1,0 +1,1274 @@
+{
+ "sdk": "@paypal/paypal-server-sdk",
+ "version": "2.5.0",
+ "generatedFrom": "node_modules/@paypal/paypal-server-sdk/src/controllers",
+ "ops": [
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "createOrder",
+   "http": "POST",
+   "path": "/v2/checkout/orders",
+   "args": {
+    "body": {
+     "optional": false,
+     "schema": "orderRequestSchema",
+     "model": "orderRequest",
+     "kind": "body"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "paypalClientMetadataId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Client-Metadata-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    }
+   },
+   "summary": "Creates an order. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and",
+   "responseSchema": "orderSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "getOrder",
+   "http": "GET",
+   "path": "/v2/checkout/orders/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "fields": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "fields"
+    }
+   },
+   "summary": "Shows details for an order, by ID. Note: For error handling and troubleshooting, see Orders v2",
+   "responseSchema": "orderSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "patchOrder",
+   "http": "PATCH",
+   "path": "/v2/checkout/orders/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "patchSchema",
+     "model": "patch",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates an order with a `CREATED` or `APPROVED` status. You cannot update an order with the",
+   "responseSchema": null
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "confirmOrder",
+   "http": "POST",
+   "path": "/v2/checkout/orders/{id}/confirm-payment-source",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalClientMetadataId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Client-Metadata-Id"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "body": {
+     "optional": true,
+     "schema": "confirmOrderRequestSchema",
+     "model": "confirmOrderRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Payer confirms their intent to pay for the the Order with the given payment source.",
+   "responseSchema": "orderSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "authorizeOrder",
+   "http": "POST",
+   "path": "/v2/checkout/orders/{id}/authorize",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalClientMetadataId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Client-Metadata-Id"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "orderAuthorizeRequestSchema",
+     "model": "orderAuthorizeRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Authorizes payment for an order. To successfully authorize payment for an order, the buyer must",
+   "responseSchema": "orderAuthorizeResponseSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "captureOrder",
+   "http": "POST",
+   "path": "/v2/checkout/orders/{id}/capture",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalClientMetadataId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Client-Metadata-Id"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "orderCaptureRequestSchema",
+     "model": "orderCaptureRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Captures payment for an order. To successfully capture payment for an order, the buyer must first",
+   "responseSchema": "orderSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "createOrderTracking",
+   "http": "POST",
+   "path": "/v2/checkout/orders/{id}/track",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": false,
+     "schema": "orderTrackerRequestSchema",
+     "model": "orderTrackerRequest",
+     "kind": "body"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    }
+   },
+   "summary": "Adds tracking information for an Order.",
+   "responseSchema": "orderSchema"
+  },
+  {
+   "controller": "OrdersController",
+   "file": "ordersController.ts",
+   "method": "updateOrderTracking",
+   "http": "PATCH",
+   "path": "/v2/checkout/orders/{id}/trackers/{trackerId}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "trackerId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "patchSchema",
+     "model": "patch",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates or cancels the tracking information for a PayPal order, by ID. Updatable attributes or",
+   "responseSchema": null
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "getAuthorizedPayment",
+   "http": "GET",
+   "path": "/v2/payments/authorizations/{authorizationId}",
+   "args": {
+    "authorizationId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    }
+   },
+   "summary": "Shows details for an authorized payment, by ID.",
+   "responseSchema": "paymentAuthorizationSchema"
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "captureAuthorizedPayment",
+   "http": "POST",
+   "path": "/v2/payments/authorizations/{authorizationId}/capture",
+   "args": {
+    "authorizationId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "captureRequestSchema",
+     "model": "captureRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Captures an authorized payment, by ID.",
+   "responseSchema": "capturedPaymentSchema"
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "reauthorizePayment",
+   "http": "POST",
+   "path": "/v2/payments/authorizations/{authorizationId}/reauthorize",
+   "args": {
+    "authorizationId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "reauthorizeRequestSchema",
+     "model": "reauthorizeRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Reauthorizes an authorized PayPal account payment, by ID. To ensure that funds are still available,",
+   "responseSchema": "paymentAuthorizationSchema"
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "voidPayment",
+   "http": "POST",
+   "path": "/v2/payments/authorizations/{authorizationId}/void",
+   "args": {
+    "authorizationId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    }
+   },
+   "summary": "Voids, or cancels, an authorized payment, by ID. You cannot void an authorized payment that has been",
+   "responseSchema": null
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "getCapturedPayment",
+   "http": "GET",
+   "path": "/v2/payments/captures/{captureId}",
+   "args": {
+    "captureId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    }
+   },
+   "summary": "Shows details for a captured payment, by ID.",
+   "responseSchema": "capturedPaymentSchema"
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "refundCapturedPayment",
+   "http": "POST",
+   "path": "/v2/payments/captures/{captureId}/refund",
+   "args": {
+    "captureId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    },
+    "body": {
+     "optional": true,
+     "schema": "refundRequestSchema",
+     "model": "refundRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Refunds a captured payment, by ID. For a full refund, include an empty payload in the JSON request",
+   "responseSchema": "refundSchema"
+  },
+  {
+   "controller": "PaymentsController",
+   "file": "paymentsController.ts",
+   "method": "getRefund",
+   "http": "GET",
+   "path": "/v2/payments/refunds/{refundId}",
+   "args": {
+    "refundId": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalMockResponse": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Mock-Response"
+    },
+    "paypalAuthAssertion": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Auth-Assertion"
+    }
+   },
+   "summary": "Shows details for a refund, by ID.",
+   "responseSchema": "refundSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "createBillingPlan",
+   "http": "POST",
+   "path": "/v1/billing/plans",
+   "args": {
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "body": {
+     "optional": true,
+     "schema": "planRequestSchema",
+     "model": "planRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Creates a plan that defines pricing and billing cycle details for subscriptions.",
+   "responseSchema": "billingPlanSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "listBillingPlans",
+   "http": "GET",
+   "path": "/v1/billing/plans",
+   "args": {
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "productId": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "product_id"
+    },
+    "pageSize": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page_size"
+    },
+    "page": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page"
+    },
+    "totalRequired": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "total_required"
+    }
+   },
+   "summary": "Lists billing plans.",
+   "responseSchema": "planCollectionSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "getBillingPlan",
+   "http": "GET",
+   "path": "/v1/billing/plans/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Shows details for a plan, by ID.",
+   "responseSchema": "billingPlanSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "patchBillingPlan",
+   "http": "PATCH",
+   "path": "/v1/billing/plans/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "patchSchema",
+     "model": "patch",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates a plan with the `CREATED` or `ACTIVE` status. For an `INACTIVE` plan, you can make only",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "activateBillingPlan",
+   "http": "POST",
+   "path": "/v1/billing/plans/{id}/activate",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Activates a plan, by ID.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "deactivateBillingPlan",
+   "http": "POST",
+   "path": "/v1/billing/plans/{id}/deactivate",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Deactivates a plan, by ID.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "updateBillingPlanPricingSchemes",
+   "http": "POST",
+   "path": "/v1/billing/plans/{id}/update-pricing-schemes",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "updatePricingSchemesRequestSchema",
+     "model": "updatePricingSchemesRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates pricing for a plan. For example, you can update a regular billing cycle from $5 per month to",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "createSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions",
+   "args": {
+    "prefer": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "Prefer"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "paypalClientMetadataId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Client-Metadata-Id"
+    },
+    "body": {
+     "optional": true,
+     "schema": "createSubscriptionRequestSchema",
+     "model": "createSubscriptionRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Creates a subscription.",
+   "responseSchema": "subscriptionSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "listSubscriptions",
+   "http": "GET",
+   "path": "/v1/billing/subscriptions",
+   "args": {
+    "planIds": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "plan_ids"
+    },
+    "statuses": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "statuses"
+    },
+    "createdAfter": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "created_after"
+    },
+    "createdBefore": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "created_before"
+    },
+    "statusUpdatedBefore": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "status_updated_before"
+    },
+    "statusUpdatedAfter": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "status_updated_after"
+    },
+    "filter": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "filter"
+    },
+    "pageSize": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page_size"
+    },
+    "page": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page"
+    },
+    "customerIds": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "customer_ids"
+    }
+   },
+   "summary": "List all subscriptions for merchant account.",
+   "responseSchema": "subscriptionCollectionSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "getSubscription",
+   "http": "GET",
+   "path": "/v1/billing/subscriptions/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "fields": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "fields"
+    }
+   },
+   "summary": "Shows details for a subscription, by ID.",
+   "responseSchema": "subscriptionSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "patchSubscription",
+   "http": "PATCH",
+   "path": "/v1/billing/subscriptions/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "patchSchema",
+     "model": "patch",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates a subscription which could be in ACTIVE or SUSPENDED status. You can override plan level",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "reviseSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions/{id}/revise",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "modifySubscriptionRequestSchema",
+     "model": "modifySubscriptionRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Updates the quantity of the product or service in a subscription. You can also use this method to",
+   "responseSchema": "modifySubscriptionResponseSchema"
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "suspendSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions/{id}/suspend",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "suspendSubscriptionSchema",
+     "model": "suspendSubscription",
+     "kind": "body"
+    }
+   },
+   "summary": "Suspends the subscription.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "cancelSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions/{id}/cancel",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "cancelSubscriptionRequestSchema",
+     "model": "cancelSubscriptionRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Cancels the subscription.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "activateSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions/{id}/activate",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "body": {
+     "optional": true,
+     "schema": "activateSubscriptionRequestSchema",
+     "model": "activateSubscriptionRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Activates the subscription.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "captureSubscription",
+   "http": "POST",
+   "path": "/v1/billing/subscriptions/{id}/capture",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    },
+    "body": {
+     "optional": true,
+     "schema": "captureSubscriptionRequestSchema",
+     "model": "captureSubscriptionRequest",
+     "kind": "body"
+    }
+   },
+   "summary": "Captures an authorized payment from the subscriber on the subscription.",
+   "responseSchema": null
+  },
+  {
+   "controller": "SubscriptionsController",
+   "file": "subscriptionsController.ts",
+   "method": "listSubscriptionTransactions",
+   "http": "GET",
+   "path": "/v1/billing/subscriptions/{id}/transactions",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    },
+    "startTime": {
+     "optional": false,
+     "model": null,
+     "kind": "query",
+     "wire": "start_time"
+    },
+    "endTime": {
+     "optional": false,
+     "model": null,
+     "kind": "query",
+     "wire": "end_time"
+    }
+   },
+   "summary": "Lists transactions for a subscription.",
+   "responseSchema": "transactionsListSchema"
+  },
+  {
+   "controller": "TransactionSearchController",
+   "file": "transactionSearchController.ts",
+   "method": "searchTransactions",
+   "http": "GET",
+   "path": "/v1/reporting/transactions",
+   "args": {
+    "startDate": {
+     "optional": false,
+     "model": null,
+     "kind": "query",
+     "wire": "start_date"
+    },
+    "endDate": {
+     "optional": false,
+     "model": null,
+     "kind": "query",
+     "wire": "end_date"
+    },
+    "transactionId": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "transaction_id"
+    },
+    "transactionType": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "transaction_type"
+    },
+    "transactionStatus": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "transaction_status"
+    },
+    "transactionAmount": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "transaction_amount"
+    },
+    "transactionCurrency": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "transaction_currency"
+    },
+    "paymentInstrumentType": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "payment_instrument_type"
+    },
+    "storeId": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "store_id"
+    },
+    "terminalId": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "terminal_id"
+    },
+    "fields": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "fields"
+    },
+    "pageSize": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page_size"
+    },
+    "page": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page"
+    }
+   },
+   "summary": "Lists transactions. Specify one or more query parameters to filter the transaction that appear in",
+   "responseSchema": "searchResponseSchema"
+  },
+  {
+   "controller": "TransactionSearchController",
+   "file": "transactionSearchController.ts",
+   "method": "searchBalances",
+   "http": "GET",
+   "path": "/v1/reporting/balances",
+   "args": {
+    "asOfTime": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "as_of_time"
+    },
+    "currencyCode": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "currency_code"
+    }
+   },
+   "summary": "List all balances. Specify date time to list balances for that time that appear in the response.",
+   "responseSchema": "balancesResponseSchema"
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "createPaymentToken",
+   "http": "POST",
+   "path": "/v3/vault/payment-tokens",
+   "args": {
+    "body": {
+     "optional": false,
+     "schema": "paymentTokenRequestSchema",
+     "model": "paymentTokenRequest",
+     "kind": "body"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    }
+   },
+   "summary": "Creates a Payment Token from the given payment source and adds it to the Vault of the associated",
+   "responseSchema": "paymentTokenResponseSchema"
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "listCustomerPaymentTokens",
+   "http": "GET",
+   "path": "/v3/vault/payment-tokens",
+   "args": {
+    "customerId": {
+     "optional": false,
+     "model": null,
+     "kind": "query",
+     "wire": "customer_id"
+    },
+    "pageSize": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page_size"
+    },
+    "page": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "page"
+    },
+    "totalRequired": {
+     "optional": true,
+     "model": null,
+     "kind": "query",
+     "wire": "total_required"
+    }
+   },
+   "summary": "Returns all payment tokens for a customer.",
+   "responseSchema": null
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "getPaymentToken",
+   "http": "GET",
+   "path": "/v3/vault/payment-tokens/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Returns a readable representation of vaulted payment source associated with the payment token id.",
+   "responseSchema": "paymentTokenResponseSchema"
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "deletePaymentToken",
+   "http": "DELETE",
+   "path": "/v3/vault/payment-tokens/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Delete the payment token associated with the payment token id.",
+   "responseSchema": null
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "createSetupToken",
+   "http": "POST",
+   "path": "/v3/vault/setup-tokens",
+   "args": {
+    "body": {
+     "optional": false,
+     "schema": "setupTokenRequestSchema",
+     "model": "setupTokenRequest",
+     "kind": "body"
+    },
+    "paypalRequestId": {
+     "optional": true,
+     "model": null,
+     "kind": "header",
+     "wire": "PayPal-Request-Id"
+    }
+   },
+   "summary": "Creates a Setup Token from the given payment source and adds it to the Vault of the associated",
+   "responseSchema": "setupTokenResponseSchema"
+  },
+  {
+   "controller": "VaultController",
+   "file": "vaultController.ts",
+   "method": "getSetupToken",
+   "http": "GET",
+   "path": "/v3/vault/setup-tokens/{id}",
+   "args": {
+    "id": {
+     "optional": false,
+     "model": null,
+     "kind": "path"
+    }
+   },
+   "summary": "Returns a readable representation of temporarily vaulted payment source associated with the setup",
+   "responseSchema": "setupTokenResponseSchema"
+  }
+ ]
+}
