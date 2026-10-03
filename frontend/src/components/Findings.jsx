@@ -8,7 +8,7 @@ const CONF = {
   recorded: 'Recorded from a sibling run',
   policy: 'Callcheck policy',
 };
-const KIND = { sandbox: 'Sandbox run', spec: 'Live schema', docs: 'PayPal docs', sibling: 'Sibling project', policy: 'Policy' };
+const KIND = { sandbox: 'Sandbox run', spec: 'Live schema', docs: 'PayPal docs', sibling: 'Our own integration', policy: 'Policy' };
 
 export function Verdict({ result }) {
   const v = result.verdict; const Icon = v.level === 'fail' ? IconBlocker : v.level === 'trap' ? IconWarn : IconOk;

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { api } from '../api.js';
 import { SEV, IconArrow } from './Icons.jsx';
 
-const KIND = { sandbox: 'Sandbox run', spec: 'Live schema', docs: 'PayPal docs', sibling: 'Sibling project', policy: 'Policy' };
+const KIND = { sandbox: 'Sandbox run', spec: 'Live schema', docs: 'PayPal docs', sibling: 'Our own integration', policy: 'Policy' };
 
 function useLoad(fn) {
   const [state, set] = useState({ data: null, error: '' });

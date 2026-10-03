@@ -3,7 +3,7 @@
 //                   RSA-SHA256 signature against the certificate named in PAYPAL-CERT-URL. The cert URL must be https on
 //                   paypal.com: PayPal's own sample code skips that check, which lets anyone sign with their own cert.
 //  * verifyViaApi - POST /v1/notifications/verify-webhook-signature, PayPal's postback check.
-// The same approach is used and tested in the dispute-defence sibling project.
+// The same checks are applied to every webhook this service accepts.
 import crypto from 'node:crypto';
 import { call } from './paypal.js';
 

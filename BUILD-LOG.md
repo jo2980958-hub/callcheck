@@ -53,7 +53,7 @@ Re-verified the corpus before encoding any of it. Results that **differ from wha
 - **`/v1/reporting/transactions` returned 200** (zero items) for a five-day window, not 403 as the brief says. A 32-day range is 400 "Date range is greater than 31 days". Recorded as "access is account-dependent", not as a settled fact either way.
 - Vault wallet setup token without `return_url`/`cancel_url`: 201 with status `CREATED` and **no approval link**; with both, `PAYER_ACTION_REQUIRED`.
 - MCP: `/http` 404, `/mcp` 401, `/sse` 401 on both hosts. Invoicing on GitHub 2.6 with 16 paths, live 2.12.0 with 27.
-- Webhook slots: 5 of 10 used at first look, 6 of 10 by the end of probing. Sibling projects are registering concurrently, so Callcheck re-checks before it registers.
+- Webhook slots: 5 of 10 used at first look, 6 of 10 by the end of probing. Registrations accumulate on the app, so Callcheck re-checks before it registers.
 
 **Disclosure**: one probe (`order.card-source`, in `evidence/probes/extra.json`) sent an order whose `payment_source.card` held the standard test PAN 4111111111111111. PayPal rejected it at header validation (`PAYPAL_REQUEST_ID_REQUIRED`) before processing. Nothing was stored or charged, but it was a card-shaped payload and the brief said never a card. The line is removed from `scripts/probe.mjs`, Callcheck refuses to run any request containing card data, and the card-related verdicts are shown as "recorded from a sibling run", not as re-run.
 

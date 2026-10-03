@@ -588,7 +588,7 @@ add({
   detect(c) {
     const out = []; const u = c.body?.url;
     if (typeof u === 'string' && /^http:\/\//i.test(u)) out.push({ severity: 'blocker', where: '/url', title: 'The webhook URL is not https', what: 'PayPal answers 400 VALIDATION_ERROR "Not a valid webhook URL".', fix: `Use ${u.replace(/^http:/i, 'https:')}.`, evidence: [this.evidence[0]], confidence: 'observed', predicts: { rank: RANK.business, status: 400, name: 'VALIDATION_ERROR', issue: /valid webhook URL/i }, patch: (r) => { r.body.url = r.body.url.replace(/^http:/i, 'https:'); } });
-    if (typeof c.deps.webhookCount === 'number') out.push({ severity: c.deps.webhookCount >= 10 ? 'blocker' : 'note', title: `${c.deps.webhookCount} of 10 webhook slots are in use on this app`, what: c.deps.webhookCount >= 10 ? 'The app is at its cap, so this registration will be refused.' : 'The limit is 10 per app. Sibling projects share this sandbox app.', fix: 'List with GET /v1/notifications/webhooks, reuse the one that already points at your listener, and delete only your own stale entries.', evidence: [this.evidence[1]], confidence: 'observed' });
+    if (typeof c.deps.webhookCount === 'number') out.push({ severity: c.deps.webhookCount >= 10 ? 'blocker' : 'note', title: `${c.deps.webhookCount} of 10 webhook slots are in use on this app`, what: c.deps.webhookCount >= 10 ? 'The app is at its cap, so this registration will be refused.' : 'The limit is 10 per app, and registrations accumulate.', fix: 'List with GET /v1/notifications/webhooks, reuse the one that already points at your listener, and delete only your own stale entries.', evidence: [this.evidence[1]], confidence: 'observed' });
     return out;
   },
 });

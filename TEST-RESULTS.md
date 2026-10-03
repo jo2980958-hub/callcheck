@@ -388,5 +388,5 @@ Full table of 166 pairs: `evidence/contrast.md`.
 
 ## 8. Known gaps
 - Two webhook examples cannot run while the app holds 9 of 10 webhooks.
-- Card and vault-token verdicts are recorded from sibling runs, not re-run.
+- Card and vault-token verdicts are recorded from earlier runs, not re-run.
 - The agent has been run live on Bedrock (18 s, tools `check_request` and `run_sandbox`) and in the deployed journey above; its fallback is tested with a simulated throttle in `agent.test.js`.
